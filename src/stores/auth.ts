@@ -1,4 +1,5 @@
 import authApi, {type Credentials} from '@/api/auth'
+import {setItem} from '@/helpers/localStorage'
 import {defineStore} from 'pinia'
 
 export const useAuthStore = defineStore({
@@ -27,6 +28,7 @@ export const useAuthStore = defineStore({
 
       try {
         const res = await authApi.register(credentials)
+        setItem('token', res.data.user.token)
         this.registerSuccess(res.data.user)
       } catch (err: any) {
         this.registerFailure(err.response.data.errors)
