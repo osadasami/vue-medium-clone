@@ -1,10 +1,16 @@
 <script setup lang="ts">
+import {useAuthStore} from '@/stores/auth'
 import {RouterLink} from 'vue-router'
 
-function onSubmit() {}
+const authStore = useAuthStore()
+
+function onSubmit() {
+  authStore.registerStart()
+}
 </script>
 
 <template>
+  {{ authStore.isSubmitting }}
   <div class="auth-page">
     <div class="container page">
       <div class="row">
@@ -36,7 +42,10 @@ function onSubmit() {}
                 placeholder="Password"
               />
             </fieldset>
-            <button class="btn btn-lg btn-primary pull-xs-right">
+            <button
+              class="btn btn-lg btn-primary pull-xs-right"
+              :disabled="authStore.isSubmitting"
+            >
               Sign Up
             </button>
           </form>
