@@ -5,7 +5,11 @@ import {RouterLink} from 'vue-router'
 const authStore = useAuthStore()
 
 function onSubmit() {
-  authStore.registerStart()
+  authStore.register({
+    email: 'hjfdghfdjghs@gmail.com',
+    password: 'afdkdlkjhsdk',
+    username: 'jhadksjkhahjkads',
+  })
 }
 </script>
 
