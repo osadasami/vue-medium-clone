@@ -3,6 +3,7 @@ import router from '@/router'
 import {useAuthStore} from '@/stores/auth'
 import {ref} from 'vue'
 import {RouterLink} from 'vue-router'
+import ValidationErrors from '../components/ValidationErrors.vue'
 
 const authStore = useAuthStore()
 const email = ref('')
@@ -31,7 +32,12 @@ async function onSubmit() {
           <p class="text-xs-center">
             <RouterLink :to="{name: 'login'}">Need an account?</RouterLink>
           </p>
-          validation errors
+
+          <ValidationErrors
+            v-if="authStore.errors"
+            :errors="authStore.errors"
+          />
+
           <form @submit.prevent="onSubmit">
             <fieldset class="form-group">
               <input
