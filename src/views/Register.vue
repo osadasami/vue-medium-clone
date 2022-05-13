@@ -1,20 +1,28 @@
 <script setup lang="ts">
+import router from '@/router'
 import {useAuthStore} from '@/stores/auth'
+import {ref} from 'vue'
 import {RouterLink} from 'vue-router'
 
 const authStore = useAuthStore()
+const email = ref('')
+const username = ref('')
+const password = ref('')
 
-function onSubmit() {
-  authStore.register({
-    email: 'hjfdghfdjghs@gmail.com',
-    password: 'afdkdlkjhsdk',
-    username: 'jhadksjkhahjkads',
+async function onSubmit() {
+  await authStore.register({
+    email: email.value,
+    password: password.value,
+    username: username.value,
   })
+
+  if (authStore.user) {
+    router.push({name: 'home'})
+  }
 }
 </script>
 
 <template>
-  {{ authStore.isSubmitting }}
   <div class="auth-page">
     <div class="container page">
       <div class="row">
@@ -27,6 +35,7 @@ function onSubmit() {
           <form @submit.prevent="onSubmit">
             <fieldset class="form-group">
               <input
+                v-model="username"
                 type="text"
                 class="form-control form-control-lg"
                 placeholder="Username"
@@ -34,6 +43,7 @@ function onSubmit() {
             </fieldset>
             <fieldset class="form-group">
               <input
+                v-model="email"
                 type="text"
                 class="form-control form-control-lg"
                 placeholder="Email"
@@ -41,6 +51,7 @@ function onSubmit() {
             </fieldset>
             <fieldset class="form-group">
               <input
+                v-model="password"
                 type="password"
                 class="form-control form-control-lg"
                 placeholder="Password"

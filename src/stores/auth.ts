@@ -5,13 +5,14 @@ export const useAuthStore = defineStore({
   id: 'auth',
   state: () => ({
     isSubmitting: false,
-    user: {},
-    errors: {},
+    user: null,
+    errors: null,
   }),
   getters: {},
   actions: {
     registerStart() {
       this.isSubmitting = true
+      this.errors = null
     },
     registerSuccess(user: any) {
       this.isSubmitting = false
