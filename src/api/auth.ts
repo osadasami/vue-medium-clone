@@ -19,7 +19,12 @@ function login(credentials: CredentialsLogin) {
   return axios.post('/users/login', {user: credentials})
 }
 
+function getCurrentUser() {
+  return axios.get('/user')
+}
+
 export default {
   register,
   login,
+  getCurrentUser,
 }

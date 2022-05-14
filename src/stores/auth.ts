@@ -9,6 +9,7 @@ export const useAuthStore = defineStore({
   id: 'auth',
   state: () => ({
     isSubmitting: false,
+    isLoading: false,
     user: null as any,
     errors: null,
   }),
@@ -63,6 +64,28 @@ export const useAuthStore = defineStore({
     loginFailure(errors: any) {
       this.isSubmitting = false
       this.errors = errors
+    },
+
+    getCurrentUserStart() {
+      this.isLoading = true
+      this.errors = null
+    },
+    getCurrentUserSuccess(user: any) {
+      this.isLoading = false
+      this.user = user
+    },
+    getCurrentUserFailure() {
+      this.isLoading = false
+      this.user = null
+    },
+    async getCurrentUser() {
+      this.getCurrentUserStart()
+      try {
+        const res = await authApi.getCurrentUser()
+        this.getCurrentUserSuccess(res.data.user)
+      } catch (err: any) {
+        this.getCurrentUserFailure()
+      }
     },
   },
 })

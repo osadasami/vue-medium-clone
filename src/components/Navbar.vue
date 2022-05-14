@@ -11,7 +11,7 @@ const authStore = useAuthStore()
       <RouterLink :to="{name: 'home'}" class="navbar-brand"
         >Medium Clone</RouterLink
       >
-      <ul class="nav navbar-nav pull-xs-right">
+      <ul class="nav navbar-nav pull-xs-right" v-if="!authStore.isLoading">
         <li class="nav-item">
           <RouterLink
             class="nav-link"
