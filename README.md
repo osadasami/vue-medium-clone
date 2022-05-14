@@ -1,7 +1,16 @@
 # Vue Medium Clone
 
-API:
-https://demo.realworld.io/#/
+Original:
+- https://demo.realworld.io/#/
+
+Api:
+- https://conduit.productionready.io/api
+
+Docs:
+- https://realworld-docs.netlify.app/docs/specs/backend-specs/endpoints
+- https://pinia.vuejs.org/
+- https://router.vuejs.org/
+- https://vuejs.org/guide/introduction.html
 
 This template should help get you started developing with Vue 3 in Vite.
 

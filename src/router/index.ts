@@ -1,6 +1,9 @@
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
+import NewArticle from '@/views/NewArticle.vue'
+import Profile from '@/views/Profile.vue'
 import Register from '@/views/Register.vue'
+import Settings from '@/views/Settings.vue'
 import {createRouter, createWebHistory} from 'vue-router'
 
 const router = createRouter({
@@ -21,6 +24,22 @@ const router = createRouter({
       name: 'login',
       component: Login,
     },
+    {
+      path: '/new-article',
+      name: 'newArticle',
+      component: NewArticle,
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Settings,
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
+    },
+
     // {
     //   path: '/about',
     //   name: 'about',

@@ -9,7 +9,7 @@ export const useAuthStore = defineStore({
   id: 'auth',
   state: () => ({
     isSubmitting: false,
-    user: null,
+    user: null as any,
     errors: null,
   }),
   getters: {},
