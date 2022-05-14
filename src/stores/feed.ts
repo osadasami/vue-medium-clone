@@ -4,7 +4,7 @@ import {defineStore} from 'pinia'
 export const useFeedStore = defineStore({
   id: 'feed',
   state: () => ({
-    data: null,
+    data: null as any,
     isLoading: false,
     error: null,
   }),

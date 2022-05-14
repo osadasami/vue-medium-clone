@@ -1,3 +1,4 @@
+import Article from '@/views/Article.vue'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
 import NewArticle from '@/views/NewArticle.vue'
@@ -25,7 +26,7 @@ const router = createRouter({
       component: Login,
     },
     {
-      path: '/new-article',
+      path: '/articles/new',
       name: 'newArticle',
       component: NewArticle,
     },
@@ -35,9 +36,38 @@ const router = createRouter({
       component: Settings,
     },
     {
-      path: '/profile',
+      path: '/profiles/:slug',
       name: 'profile',
       component: Profile,
+    },
+
+    {
+      path: '/profiles/:slug/favorites',
+      name: 'favorites',
+      component: Profile,
+    },
+
+    {
+      path: '/articles/:slug',
+      name: 'article',
+      component: Article,
+    },
+
+    {
+      path: '/articles/:slug/edit',
+      name: 'editArticle',
+      component: Article,
+    },
+
+    {
+      path: '/feed',
+      name: 'userFeed',
+      component: Home,
+    },
+    {
+      path: '/tags/:slug',
+      name: 'tagFeed',
+      component: Home,
     },
 
     // {
