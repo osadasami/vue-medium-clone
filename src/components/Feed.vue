@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {useFeedStore} from '@/stores/feed'
-import {onMounted} from 'vue'
-import {RouterLink} from 'vue-router'
+import {computed, onMounted, watch} from 'vue'
+import {parseQuery, RouterLink, stringifyQuery, useRoute} from 'vue-router'
 import Pagination from './Pagination.vue'
 
 const props = defineProps<{
@@ -9,8 +9,29 @@ const props = defineProps<{
 }>()
 
 const feedStore = useFeedStore()
+const route = useRoute()
+const limit = 10
+
+const currentPage = computed(() => {
+  return Number(route.query.page || 1)
+})
+
+const offset = computed(() => {
+  return currentPage.value * limit - limit
+})
 
 onMounted(() => {
+  const parsedUrl = parseQuery(location.search)
+  const stringifiedParams = stringifyQuery({
+    limit,
+    offset: offset.value,
+    ...parsedUrl,
+  })
+  const urlWithParams = `${props.url}?${stringifiedParams}`
+  feedStore.getFeed({url: urlWithParams})
+})
+
+watch(currentPage, () => {
   feedStore.getFeed({url: props.url})
 })
 </script>
@@ -56,10 +77,10 @@ onMounted(() => {
       </div>
 
       <Pagination
-        :total="500"
+        :total="feedStore.data.articlesCount"
         :limit="10"
-        :current-page="5"
-        :url="'/tags/dragons'"
+        :current-page="currentPage"
+        :url="route.path"
       />
     </div>
   </div>

@@ -1,5 +1,5 @@
 export function getItem(key: string) {
-  return JSON.parse(localStorage.getItem(key) || '{}')
+  return JSON.parse(localStorage.getItem(key)!)
 }
 
 export function setItem(key: string, value: any) {
