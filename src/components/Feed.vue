@@ -2,6 +2,7 @@
 import {useFeedStore} from '@/stores/feed'
 import {onMounted} from 'vue'
 import {RouterLink} from 'vue-router'
+import Pagination from './Pagination.vue'
 
 const props = defineProps<{
   url: string
@@ -53,7 +54,13 @@ onMounted(() => {
           TAG LIST
         </RouterLink>
       </div>
-      PAGINATION
+
+      <Pagination
+        :total="500"
+        :limit="10"
+        :current-page="5"
+        :url="'/tags/dragons'"
+      />
     </div>
   </div>
 </template>
