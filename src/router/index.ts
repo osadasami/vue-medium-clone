@@ -5,6 +5,8 @@ import NewArticle from '@/views/NewArticle.vue'
 import Profile from '@/views/Profile.vue'
 import Register from '@/views/Register.vue'
 import Settings from '@/views/Settings.vue'
+import TagFeed from '@/views/TagFeed.vue'
+import UserFeed from '@/views/UserFeed.vue'
 import {createRouter, createWebHistory} from 'vue-router'
 
 const router = createRouter({
@@ -62,12 +64,12 @@ const router = createRouter({
     {
       path: '/feed',
       name: 'userFeed',
-      component: Home,
+      component: UserFeed,
     },
     {
       path: '/tags/:slug',
       name: 'tagFeed',
-      component: Home,
+      component: TagFeed,
     },
 
     // {

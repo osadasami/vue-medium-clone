@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import {useFeedStore} from '@/stores/feed'
 import {computed, onMounted, watch} from 'vue'
-import {parseQuery, RouterLink, stringifyQuery, useRoute} from 'vue-router'
+import {RouterLink, stringifyQuery, useRoute} from 'vue-router'
 import Loading from '../views/Loading.vue'
 import Error from './Error.vue'
 import Pagination from './Pagination.vue'
 
 const props = defineProps<{
   url: string
+  params?: object
 }>()
 
 const feedStore = useFeedStore()
@@ -22,14 +23,18 @@ const offset = computed(() => {
   return currentPage.value * limit - limit
 })
 
-onMounted(() => {
-  const parsedUrl = parseQuery(location.search)
+function prepareUrl() {
   const stringifiedParams = stringifyQuery({
     limit,
     offset: offset.value,
-    ...parsedUrl,
+    ...props.params,
   })
   const urlWithParams = `${props.url}?${stringifiedParams}`
+  return urlWithParams
+}
+
+onMounted(() => {
+  const urlWithParams = prepareUrl()
   feedStore.getFeed({url: urlWithParams})
 })
 
