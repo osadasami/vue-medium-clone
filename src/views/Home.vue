@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Feed from '@/components/Feed.vue'
+import PopularTags from '../components/PopularTags.vue'
 </script>
 
 <template>
@@ -10,7 +11,9 @@ import Feed from '@/components/Feed.vue'
         <div class="col-md-9">
           <Feed url="/articles" />
         </div>
-        <div class="col-md-3">TAGS</div>
+        <div class="col-md-3">
+          <PopularTags />
+        </div>
       </div>
     </div>
   </div>
