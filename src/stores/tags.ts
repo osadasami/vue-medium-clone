@@ -17,8 +17,9 @@ export const useTagsStore = defineStore({
       this.tags = tags
       this.isLoading = false
     },
-    getTagsFailure() {
+    getTagsFailure(err: any) {
       this.isLoading = false
+      this.error = err
     },
     async getTags() {
       this.getTagsStart()
@@ -27,7 +28,7 @@ export const useTagsStore = defineStore({
         const res = await tagsApi.getTags()
         this.getTagsSuccess(res.data.tags)
       } catch (err: any) {
-        this.getTagsFailure()
+        this.getTagsFailure(err)
       }
     },
   },

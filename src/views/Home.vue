@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import Feed from '@/components/Feed.vue'
+import Banner from '../components/Banner.vue'
 import PopularTags from '../components/PopularTags.vue'
 </script>
 
 <template>
   <div class="home-page">
-    BANNER
+    <Banner />
     <div class="container page">
       <div class="row">
         <div class="col-md-9">

@@ -2,6 +2,8 @@
 import {useFeedStore} from '@/stores/feed'
 import {computed, onMounted, watch} from 'vue'
 import {parseQuery, RouterLink, stringifyQuery, useRoute} from 'vue-router'
+import Loading from '../views/Loading.vue'
+import Error from './Error.vue'
 import Pagination from './Pagination.vue'
 
 const props = defineProps<{
@@ -38,10 +40,8 @@ watch(currentPage, () => {
 
 <template>
   <div>
-    <div v-if="feedStore.isLoading">Loading…</div>
-    <div v-if="feedStore.error">
-      Somethind went wrong. Try to reload the page
-    </div>
+    <Loading v-if="feedStore.isLoading" />
+    <Error v-if="feedStore.error" />
 
     <div v-if="feedStore.data">
       <div class="article-preview" v-for="article in feedStore.data.articles">

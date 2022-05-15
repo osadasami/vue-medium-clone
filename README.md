@@ -4,7 +4,8 @@ Original:
 - https://demo.realworld.io/#/
 
 Api:
-- https://conduit.productionready.io/api
+- Old: https://conduit.productionready.io/api
+- New: https://api.realworld.io/api
 
 Docs:
 - https://realworld-docs.netlify.app/docs/specs/backend-specs/endpoints

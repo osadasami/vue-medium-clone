@@ -2,6 +2,8 @@
 import {useTagsStore} from '@/stores/tags'
 import {onMounted} from 'vue'
 import {RouterLink} from 'vue-router'
+import Loading from '../views/Loading.vue'
+import Error from './Error.vue'
 
 const tagsStore = useTagsStore()
 
@@ -21,9 +23,10 @@ onMounted(() => {
         >{{ tag }}</RouterLink
       >
     </div>
-    <div v-if="tagsStore.isLoading">Loading tags…</div>
+    <Loading v-if="tagsStore.isLoading" />
     <div v-if="!tagsStore.tags && !tagsStore.isLoading">
       No tags are here... yet.
     </div>
+    <Error v-if="tagsStore.error" />
   </div>
 </template>
