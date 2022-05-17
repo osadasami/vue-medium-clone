@@ -33,5 +33,29 @@ export const useArticleStore = defineStore({
         this.getArticleFailure(error)
       }
     },
+
+    // delete article
+    deleteArticleStart() {
+      this.isLoading = true
+      this.error = null
+    },
+    deleteArticleSuccess() {
+      this.data = null
+      this.isLoading = false
+    },
+    deleteArticleFailure(error: any) {
+      this.error = error
+      this.isLoading = false
+    },
+    async deleteArticle(slug: string) {
+      this.deleteArticleStart()
+
+      try {
+        await articleApi.deleteArticle(slug)
+        this.deleteArticleSuccess()
+      } catch (error: any) {
+        this.deleteArticleFailure(error)
+      }
+    },
   },
 })

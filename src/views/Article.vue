@@ -1,16 +1,36 @@
 <script setup lang="ts">
+import router from '@/router'
 import {useArticleStore} from '@/stores/article'
-import {onMounted} from 'vue'
+import {useAuthStore} from '@/stores/auth'
+import {computed, onMounted} from 'vue'
 import {RouterLink, useRoute} from 'vue-router'
 import Error from '../components/Error.vue'
 import Loading from './Loading.vue'
 
 const route = useRoute()
 const articleStore = useArticleStore()
+const authStore = useAuthStore()
+
+const isAuthor = computed(() => {
+  if (!authStore.user) {
+    return false
+  }
+
+  if (authStore.user.username === articleStore.data.author.username) {
+    return true
+  } else {
+    return false
+  }
+})
 
 onMounted(() => {
   articleStore.getArticle(route.params.slug as string)
 })
+
+async function deleteArticle() {
+  await articleStore.deleteArticle(route.params.slug as string)
+  router.push({name: 'home'})
+}
 </script>
 
 <template>
@@ -43,7 +63,7 @@ onMounted(() => {
               {{ articleStore.data.createdAt }}
             </span>
           </div>
-          <span>
+          <span v-if="isAuthor">
             <RouterLink
               class="btn btn-outline-secondary btn-sm"
               :to="{
@@ -52,7 +72,10 @@ onMounted(() => {
               }"
               ><i class="ion-edit"></i> Edit Article</RouterLink
             >
-            <button class="btn btn-outline-danger btn-sm">
+            <button
+              class="btn btn-outline-danger btn-sm"
+              @click="deleteArticle"
+            >
               <i class="ion-trash-a"></i>
               Delete Article
             </button>
