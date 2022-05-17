@@ -94,7 +94,7 @@ async function deleteArticle() {
             <p>
               {{ articleStore.data.body }}
             </p>
-            <TagList :tags="articleStore.data.tagList" />
+            <TagList :tag-list="articleStore.data.tagList" />
           </div>
         </div>
       </div>

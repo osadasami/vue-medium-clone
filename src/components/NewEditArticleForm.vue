@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import {reactive, ref} from 'vue'
+import ValidationErrors from './ValidationErrors.vue'
 
 type formData = {
   title: string
   description: string
   body: string
-  tags: string[]
+  tagList: string[]
 }
 
 const props = defineProps<{
   title: string
   description: string
   body: string
-  tags: string[]
-  errors: string[]
+  tagList: string[]
+  errors: any
   isSubmitting: boolean
 }>()
 
@@ -25,23 +26,21 @@ const data = reactive({
   title: props.title || '',
   description: props.description || '',
   body: props.body || '',
-  tags: props.tags || [],
-  errors: props.errors || [],
-  isSubmitting: props.isSubmitting || false,
+  tagList: props.tagList || [],
 })
 
 const newTag = ref('')
 
 function addTag() {
-  if (data.tags.includes(newTag.value) || !newTag.value) {
+  if (data.tagList.includes(newTag.value) || !newTag.value) {
     return
   }
-  data.tags.push(newTag.value)
+  data.tagList.push(newTag.value)
   newTag.value = ''
 }
 
 function deleteTag(deletingTag: string) {
-  data.tags = data.tags.filter((tag) => tag !== deletingTag)
+  data.tagList = data.tagList.filter((tag) => tag !== deletingTag)
 }
 
 function onSubmit(e: any) {
@@ -51,6 +50,10 @@ function onSubmit(e: any) {
 
 <template>
   <form @submit.prevent="onSubmit">
+    <ValidationErrors
+      v-if="props.errors && props.errors.response.data.errors"
+      :errors="props.errors.response.data.errors"
+    />
     <fieldset class="form-group">
       <input
         v-model="data.title"
@@ -89,14 +92,18 @@ function onSubmit(e: any) {
       />
 
       <div class="tag-list">
-        <span class="tag-default tag-pill" v-for="tag in data.tags">
+        <span class="tag-default tag-pill" v-for="tag in data.tagList">
           <i class="ion-close-round" @click="deleteTag(tag)"></i>
           {{ tag }}
         </span>
       </div>
     </fieldset>
 
-    <button class="btn btn-lg pull-xs-right btn-primary" type="submit">
+    <button
+      class="btn btn-lg pull-xs-right btn-primary"
+      type="submit"
+      :disabled="props.isSubmitting"
+    >
       Publish Article
     </button>
   </form>

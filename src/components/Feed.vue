@@ -78,7 +78,7 @@ watch(currentPage, () => {
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
           <span>Read more…</span>
-          <TagList :tags="article.tagList" />
+          <TagList :tag-list="article.tagList" />
         </RouterLink>
       </div>
 

@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import {useNewArticleStore} from '@/stores/newArticle'
 import NewEditArticleForm from '../components/NewEditArticleForm.vue'
 
-function onSubmit() {
-  console.log(arguments)
+const newArticleStore = useNewArticleStore()
+
+function onSubmit(data: any) {
+  newArticleStore.createArticle(data)
 }
 </script>
 
@@ -15,9 +18,9 @@ function onSubmit() {
             title=""
             description=""
             body=""
-            :tags="[]"
-            :errors="[]"
-            :is-submitting="false"
+            :tag-list="[]"
+            :errors="newArticleStore.error"
+            :is-submitting="newArticleStore.isSubmitting"
             @onSubmit="onSubmit"
           />
         </div>
