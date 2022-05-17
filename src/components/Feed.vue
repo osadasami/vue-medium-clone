@@ -5,6 +5,7 @@ import {RouterLink, stringifyQuery, useRoute} from 'vue-router'
 import Loading from '../views/Loading.vue'
 import Error from './Error.vue'
 import Pagination from './Pagination.vue'
+import TagList from './TagList.vue'
 
 const props = defineProps<{
   url: string
@@ -77,7 +78,7 @@ watch(currentPage, () => {
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
           <span>Read more…</span>
-          TAG LIST
+          <TagList :tags="article.tagList" />
         </RouterLink>
       </div>
 

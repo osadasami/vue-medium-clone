@@ -5,6 +5,7 @@ import {useAuthStore} from '@/stores/auth'
 import {computed, onMounted} from 'vue'
 import {RouterLink, useRoute} from 'vue-router'
 import Error from '../components/Error.vue'
+import TagList from '../components/TagList.vue'
 import Loading from './Loading.vue'
 
 const route = useRoute()
@@ -93,8 +94,8 @@ async function deleteArticle() {
             <p>
               {{ articleStore.data.body }}
             </p>
+            <TagList :tags="articleStore.data.tagList" />
           </div>
-          TAGLIST
         </div>
       </div>
     </div>
