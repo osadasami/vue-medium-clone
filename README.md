@@ -1,5 +1,10 @@
 # Vue Medium Clone
 
+Auth:
+- Username: makakaka
+- Email: makakaka@gmail.com
+- Password: makakaka@gmail.com
+
 Original:
 - https://demo.realworld.io/#/
 
