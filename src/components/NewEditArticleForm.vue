@@ -16,6 +16,7 @@ const props = defineProps<{
   tagList: string[]
   errors: any
   isSubmitting: boolean
+  submitText?: string
 }>()
 
 const emit = defineEmits<{
@@ -30,6 +31,7 @@ const data = reactive({
 })
 
 const newTag = ref('')
+const submitText = props.submitText || 'Submit'
 
 function addTag() {
   if (data.tagList.includes(newTag.value) || !newTag.value) {
@@ -104,7 +106,7 @@ function onSubmit(e: any) {
       type="submit"
       :disabled="props.isSubmitting"
     >
-      Publish Article
+      {{ submitText }}
     </button>
   </form>
 </template>

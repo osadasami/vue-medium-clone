@@ -12,8 +12,15 @@ function createArticle(article: any) {
   return axios.post('/articles', {article}).then((res) => res.data.article)
 }
 
+function updateArticle(slug: string, data: any) {
+  return axios
+    .put(`/articles/${slug}`, {article: data})
+    .then((res) => res.data.article)
+}
+
 export default {
   getArticle,
   deleteArticle,
   createArticle,
+  updateArticle,
 }

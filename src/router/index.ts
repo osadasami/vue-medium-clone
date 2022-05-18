@@ -1,4 +1,5 @@
 import Article from '@/views/Article.vue'
+import EditArticle from '@/views/EditArticle.vue'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
 import NewArticle from '@/views/NewArticle.vue'
@@ -58,7 +59,7 @@ const router = createRouter({
     {
       path: '/articles/:slug/edit',
       name: 'editArticle',
-      component: Article,
+      component: EditArticle,
     },
 
     {
