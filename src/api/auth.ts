@@ -23,8 +23,13 @@ function getCurrentUser() {
   return axios.get('/user')
 }
 
+function updateCurrentUser(user: any) {
+  return axios.put('/user', {user})
+}
+
 export default {
   register,
   login,
   getCurrentUser,
+  updateCurrentUser,
 }

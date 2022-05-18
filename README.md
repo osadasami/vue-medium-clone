@@ -1,6 +1,7 @@
 # Vue Medium Clone
 
 Auth:
+- qwe@asdafsfd:qwe
 - Username: makakaka
 - Email: makakaka@gmail.com
 - Password: makakaka@gmail.com

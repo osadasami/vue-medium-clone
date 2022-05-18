@@ -3,6 +3,7 @@ import authApi, {
   type CredentialsRegister,
 } from '@/api/auth'
 import {setItem} from '@/helpers/localStorage'
+import router from '@/router'
 import {defineStore} from 'pinia'
 
 export const useAuthStore = defineStore({
@@ -86,6 +87,14 @@ export const useAuthStore = defineStore({
       } catch (err: any) {
         this.getCurrentUserFailure()
       }
+    },
+    updateCurrentUserSuccess(user: any) {
+      this.user = user
+    },
+    logout() {
+      this.user = null
+      setItem('token', '')
+      router.push({name: 'home'})
     },
   },
 })
