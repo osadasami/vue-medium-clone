@@ -6,6 +6,7 @@ import {useUserProfileFollowStore} from '@/stores/userProfileFollow'
 import {computed, onMounted, watch} from 'vue'
 import {RouterLink, useRoute} from 'vue-router'
 import Feed from '../components/Feed.vue'
+import FollowProfile from '../components/FollowProfile.vue'
 
 const route = useRoute()
 const userProfileStore = useUserProfileStore()
@@ -45,21 +46,10 @@ onMounted(async () => {
             <h4>{{ userProfileStore.profile.username }}</h4>
             <p>{{ userProfileStore.profile.bio }}</p>
             <div>
-              <button
-                @click="
-                  userProfileFollowStore.follow(
-                    userProfileStore.profile.username,
-                    userProfileStore.profile.following
-                  )
-                "
-                class="btn btn-sm action-btn ng-binding btn-outline-secondary"
-                :disabled="userProfileFollowStore.isLoading"
-              >
-                <i class="ion-plus-round"></i>
-                &nbsp;
-                {{ userProfileStore.profile.following ? 'Unfollow' : 'Follow' }}
-                {{ userProfileStore.profile.username }}
-              </button>
+              <FollowProfile
+                :username="userProfileStore.profile.username"
+                :is-following="userProfileStore.profile.following"
+              />
 
               <RouterLink
                 :to="{name: 'settings'}"

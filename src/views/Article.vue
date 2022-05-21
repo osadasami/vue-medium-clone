@@ -5,6 +5,7 @@ import {useAuthStore} from '@/stores/auth'
 import {computed, onMounted} from 'vue'
 import {RouterLink, useRoute} from 'vue-router'
 import Error from '../components/Error.vue'
+import FollowProfile from '../components/FollowProfile.vue'
 import TagList from '../components/TagList.vue'
 import Loading from './Loading.vue'
 
@@ -81,6 +82,12 @@ async function deleteArticle() {
               <i class="ion-trash-a"></i>
               Delete Article
             </button>
+          </span>
+          <span v-else>
+            <FollowProfile
+              :username="articleStore.data.author.username"
+              :is-following="articleStore.data.author.following"
+            />
           </span>
         </div>
       </div>
