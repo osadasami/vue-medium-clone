@@ -71,8 +71,9 @@ async function deleteArticle() {
                 name: 'editArticle',
                 params: {slug: articleStore.data.slug},
               }"
-              ><i class="ion-edit"></i> Edit Article</RouterLink
+              ><i class="ion-edit"></i>Edit Article</RouterLink
             >
+            &nbsp;
             <button
               class="btn btn-outline-danger btn-sm"
               @click="deleteArticle"

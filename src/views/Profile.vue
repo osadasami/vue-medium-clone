@@ -1,12 +1,15 @@
+useUserProfileFollowStore
 <script setup lang="ts">
 import {useAuthStore} from '@/stores/auth'
 import {useUserProfileStore} from '@/stores/userProfile'
+import {useUserProfileFollowStore} from '@/stores/userProfileFollow'
 import {computed, onMounted, watch} from 'vue'
 import {RouterLink, useRoute} from 'vue-router'
 import Feed from '../components/Feed.vue'
 
 const route = useRoute()
 const userProfileStore = useUserProfileStore()
+const userProfileFollowStore = useUserProfileFollowStore()
 const authStore = useAuthStore()
 const apiParams = computed(() => {
   const isFavorites = route.path.includes('favorites')
@@ -42,7 +45,22 @@ onMounted(async () => {
             <h4>{{ userProfileStore.profile.username }}</h4>
             <p>{{ userProfileStore.profile.bio }}</p>
             <div>
-              FOLLOW USER
+              <button
+                @click="
+                  userProfileFollowStore.follow(
+                    userProfileStore.profile.username,
+                    userProfileStore.profile.following
+                  )
+                "
+                class="btn btn-sm action-btn ng-binding btn-outline-secondary"
+                :disabled="userProfileFollowStore.isLoading"
+              >
+                <i class="ion-plus-round"></i>
+                &nbsp;
+                {{ userProfileStore.profile.following ? 'Unfollow' : 'Follow' }}
+                {{ userProfileStore.profile.username }}
+              </button>
+
               <RouterLink
                 :to="{name: 'settings'}"
                 v-if="isCurrentUserProfile"
