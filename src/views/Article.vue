@@ -4,6 +4,7 @@ import {useArticleStore} from '@/stores/article'
 import {useAuthStore} from '@/stores/auth'
 import {computed, onMounted} from 'vue'
 import {RouterLink, useRoute} from 'vue-router'
+import AddToFavoriteButton from '../components/AddToFavoriteButton.vue'
 import Error from '../components/Error.vue'
 import FollowProfile from '../components/FollowProfile.vue'
 import TagList from '../components/TagList.vue'
@@ -87,6 +88,12 @@ async function deleteArticle() {
             <FollowProfile
               :username="articleStore.data.author.username"
               :is-following="articleStore.data.author.following"
+            />
+            &nbsp;
+            <AddToFavoriteButton
+              :article-slug="articleStore.data.slug"
+              :is-favorited="articleStore.data.favorited"
+              :favorites-count="articleStore.data.favoritesCount"
             />
           </span>
         </div>

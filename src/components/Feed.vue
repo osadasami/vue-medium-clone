@@ -3,7 +3,7 @@ import {useFeedStore} from '@/stores/feed'
 import {computed, onMounted, watch} from 'vue'
 import {RouterLink, stringifyQuery, useRoute} from 'vue-router'
 import Loading from '../views/Loading.vue'
-import AddToFavorite from './AddToFavorite.vue'
+import AddToFavoriteCounter from './AddToFavoriteCounter.vue'
 import Error from './Error.vue'
 import Pagination from './Pagination.vue'
 import TagList from './TagList.vue'
@@ -71,7 +71,7 @@ watch(currentPage, () => {
             </span>
           </div>
           <div class="pull-xs-right">
-            <AddToFavorite
+            <AddToFavoriteCounter
               :is-favorited="article.favorited"
               :article-slug="article.slug"
               :favorites-count="article.favoritesCount"
