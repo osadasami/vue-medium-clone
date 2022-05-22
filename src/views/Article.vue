@@ -5,6 +5,7 @@ import {useAuthStore} from '@/stores/auth'
 import {computed, onMounted} from 'vue'
 import {RouterLink, useRoute} from 'vue-router'
 import AddToFavoriteButton from '../components/AddToFavoriteButton.vue'
+import Comments from '../components/Comments.vue'
 import Error from '../components/Error.vue'
 import FollowProfile from '../components/FollowProfile.vue'
 import TagList from '../components/TagList.vue'
@@ -14,8 +15,12 @@ const route = useRoute()
 const articleStore = useArticleStore()
 const authStore = useAuthStore()
 
+const isLoggedIn = computed(() => {
+  return !!authStore.user
+})
+
 const isAuthor = computed(() => {
-  if (!authStore.user) {
+  if (!isLoggedIn) {
     return false
   }
 
@@ -113,6 +118,12 @@ async function deleteArticle() {
           </div>
         </div>
       </div>
+
+      <Comments
+        :slug="articleStore.data.slug"
+        :is-logged-in="isLoggedIn"
+        v-if="articleStore.data"
+      />
     </div>
   </div>
 </template>

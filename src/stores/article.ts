@@ -1,4 +1,5 @@
 import articleApi from '@/api/article'
+import {useCommentsStore} from '@/stores/comments'
 import {defineStore} from 'pinia'
 
 export const useArticleStore = defineStore({
@@ -8,7 +9,6 @@ export const useArticleStore = defineStore({
     isLoading: false,
     error: null as any,
   }),
-  getters: {},
   actions: {
     getArticleStart() {
       this.isLoading = true
@@ -24,11 +24,13 @@ export const useArticleStore = defineStore({
       this.isLoading = false
     },
     async getArticle(slug: string) {
+      const commentsStore = useCommentsStore()
       this.getArticleStart()
 
       try {
         const article = await articleApi.getArticle(slug)
         this.getArticleSuccess(article)
+        commentsStore.getComments(slug)
       } catch (error: any) {
         this.getArticleFailure(error)
       }

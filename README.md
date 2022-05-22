@@ -2,9 +2,7 @@
 
 Auth:
 - qwe@asdafsfd:qwe
-- Username: makakaka
-- Email: makakaka@gmail.com
-- Password: makakaka@gmail.com
+- makakaka:makakaka@gmail.com:makakaka@gmail.com
 
 Original:
 - https://demo.realworld.io/#/
