@@ -8,6 +8,14 @@ export const useCommentsStore = defineStore({
     error: null,
     data: null as any,
   }),
+  getters: {
+    comments: (state) => {
+      if (!state.data) return
+      return state.data.sort(
+        (a: any, b: any) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
+      )
+    },
+  },
   actions: {
     getCommentsStart() {
       this.data = null
@@ -38,7 +46,7 @@ export const useCommentsStore = defineStore({
     },
     createCommentSuccess(comment: any) {
       this.isLoading = false
-      this.data.push(comment)
+      this.data.unshift(comment)
     },
     createCommentFailure(error: any) {
       this.isLoading = false

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {useArticleStore} from '@/stores/article'
 import {useAuthStore} from '@/stores/auth'
 import {useCommentsStore} from '@/stores/comments'
 import {ref} from 'vue'
@@ -12,9 +11,7 @@ const props = defineProps<{
 }>()
 
 const commentsStore = useCommentsStore()
-const articleStore = useArticleStore()
 const authStore = useAuthStore()
-
 const newComment = ref('')
 
 function isAuthor(author: string) {
@@ -70,7 +67,7 @@ async function createComment() {
         to add comments on this article.
       </p>
 
-      <div class="card" v-for="comment in commentsStore.data">
+      <div class="card" v-for="comment in commentsStore.comments">
         <div class="card-block">
           <p class="card-text">
             {{ comment.body }}
