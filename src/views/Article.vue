@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {formatDate} from '@/filters/formatDate'
 import router from '@/router'
 import {useArticleStore} from '@/stores/article'
 import {useAuthStore} from '@/stores/auth'
@@ -68,7 +69,7 @@ async function deleteArticle() {
               {{ articleStore.data.author.username }}
             </RouterLink>
             <span class="date">
-              {{ articleStore.data.createdAt }}
+              {{ formatDate(articleStore.data.createdAt) }}
             </span>
           </div>
           <span v-if="isAuthor">

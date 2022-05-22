@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {formatDate} from '@/filters/formatDate'
 import {useAuthStore} from '@/stores/auth'
 import {useCommentsStore} from '@/stores/comments'
 import {ref} from 'vue'
@@ -87,7 +88,7 @@ async function createComment() {
             >{{ comment.author.username }}</RouterLink
           >
 
-          <span class="date-posted">{{ comment.createdAt }}</span>
+          <span class="date-posted">{{ formatDate(comment.createdAt) }}</span>
           <span class="mod-options" v-if="isAuthor(comment.author.username)">
             <i class="ion-trash-a" @click="deleteComment(comment.id)"></i>
           </span>

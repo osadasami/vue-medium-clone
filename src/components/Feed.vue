@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {formatDate} from '@/filters/formatDate'
 import {useFeedStore} from '@/stores/feed'
 import {computed, onMounted, watch} from 'vue'
 import {RouterLink, stringifyQuery, useRoute} from 'vue-router'
@@ -67,7 +68,7 @@ watch(currentPage, () => {
             </RouterLink>
 
             <span class="date">
-              {{ article.createdAt }}
+              {{ formatDate(article.createdAt) }}
             </span>
           </div>
           <div class="pull-xs-right">
