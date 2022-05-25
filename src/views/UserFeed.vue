@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import Banner from '@/components/Banner.vue'
 import Feed from '@/components/Feed.vue'
-import Banner from '../components/Banner.vue'
-import FeedTabs from '../components/FeedTabs.vue'
-import PopularTags from '../components/PopularTags.vue'
+import FeedTabs from '@/components/FeedTabs.vue'
+import PopularTags from '@/components/PopularTags.vue'
 </script>
 
 <template>

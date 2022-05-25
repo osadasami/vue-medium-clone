@@ -1,5 +1,6 @@
 import authApi from '@/api/auth'
 import {useAuthStore} from '@/stores/auth'
+import type {User} from '@/types'
 import {defineStore} from 'pinia'
 
 export const useSettingsStore = defineStore({
@@ -13,7 +14,7 @@ export const useSettingsStore = defineStore({
       this.isSubmitting = true
       this.errors = null
     },
-    updateurrentUserSuccess(user: any) {
+    updateurrentUserSuccess(user: User) {
       this.isSubmitting = false
       const authStore = useAuthStore()
       authStore.updateCurrentUserSuccess(user)
@@ -22,7 +23,7 @@ export const useSettingsStore = defineStore({
       this.isSubmitting = false
       this.errors = errors
     },
-    async updateCurrentUser(user: any) {
+    async updateCurrentUser(user: User) {
       this.updateCurrentUserStart()
 
       try {

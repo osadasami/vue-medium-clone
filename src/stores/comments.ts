@@ -1,4 +1,5 @@
 import commentsApi from '@/api/comments'
+import type {Comment, Comments} from '@/types'
 import {defineStore} from 'pinia'
 
 export const useCommentsStore = defineStore({
@@ -6,7 +7,7 @@ export const useCommentsStore = defineStore({
   state: () => ({
     isLoading: false,
     error: null,
-    data: null as any,
+    data: null as Comments | null,
   }),
   getters: {
     comments: (state) => {
@@ -22,7 +23,7 @@ export const useCommentsStore = defineStore({
       this.error = null
       this.isLoading = true
     },
-    getCommentsSuccess(comments: any) {
+    getCommentsSuccess(comments: Comments) {
       this.data = comments
       this.isLoading = false
     },
@@ -44,9 +45,9 @@ export const useCommentsStore = defineStore({
       this.error = null
       this.isLoading = true
     },
-    createCommentSuccess(comment: any) {
+    createCommentSuccess(comment: Comment) {
       this.isLoading = false
-      this.data.unshift(comment)
+      this.data!.unshift(comment)
     },
     createCommentFailure(error: any) {
       this.isLoading = false
@@ -69,7 +70,7 @@ export const useCommentsStore = defineStore({
     },
     deleteCommentSuccess(id: number) {
       this.isLoading = false
-      this.data = this.data.filter((comment: any) => comment.id != id)
+      this.data = this.data!.filter((comment: Comment) => comment.id != id)
     },
     deleteCommentFailure(error: any) {
       this.isLoading = false

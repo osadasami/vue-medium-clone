@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import NewEditArticleForm from '@/components/NewEditArticleForm.vue'
 import {useNewArticleStore} from '@/stores/newArticle'
-import NewEditArticleForm from '../components/NewEditArticleForm.vue'
 
 const newArticleStore = useNewArticleStore()
 

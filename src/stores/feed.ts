@@ -1,10 +1,11 @@
 import feedApi from '@/api/feed'
+import type {Articles} from '@/types'
 import {defineStore} from 'pinia'
 
 export const useFeedStore = defineStore({
   id: 'feed',
   state: () => ({
-    data: null as any,
+    data: null as Articles | null,
     isLoading: false,
     error: null,
   }),
@@ -15,7 +16,7 @@ export const useFeedStore = defineStore({
       this.error = null
       this.data = null
     },
-    getFeedSuccess(data: any) {
+    getFeedSuccess(data: Articles) {
       this.isLoading = false
       this.data = data
     },

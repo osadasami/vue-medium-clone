@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import AddToFavoriteCounter from '@/components/AddToFavoriteCounter.vue'
+import Error from '@/components/Error.vue'
+import Loading from '@/components/Loading.vue'
+import Pagination from '@/components/Pagination.vue'
+import TagList from '@/components/TagList.vue'
 import {formatDate} from '@/filters/formatDate'
 import {useFeedStore} from '@/stores/feed'
 import {computed, onMounted, watch} from 'vue'
 import {RouterLink, stringifyQuery, useRoute} from 'vue-router'
-import Loading from '../views/Loading.vue'
-import AddToFavoriteCounter from './AddToFavoriteCounter.vue'
-import Error from './Error.vue'
-import Pagination from './Pagination.vue'
-import TagList from './TagList.vue'
 
 const props = defineProps<{
   url: string

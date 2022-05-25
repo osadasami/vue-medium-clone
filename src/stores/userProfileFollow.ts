@@ -1,5 +1,6 @@
 import userProfileApi from '@/api/userProfile'
 import {useUserProfileStore} from '@/stores/userProfile'
+import type {Profile} from '@/types'
 import {defineStore} from 'pinia'
 
 export const useUserProfileFollowStore = defineStore({
@@ -13,7 +14,7 @@ export const useUserProfileFollowStore = defineStore({
       this.isLoading = true
       this.error = null
     },
-    followSuccess(profile: any) {
+    followSuccess(profile: Profile) {
       const userProfileStore = useUserProfileStore()
       this.isLoading = false
       userProfileStore.getUserProfileSuccess(profile)

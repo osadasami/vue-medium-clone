@@ -1,5 +1,6 @@
 import articleApi from '@/api/article'
 import router from '@/router'
+import type {Article} from '@/types'
 import {defineStore} from 'pinia'
 
 export const useEditArticleStore = defineStore({
@@ -20,11 +21,11 @@ export const useEditArticleStore = defineStore({
       this.isSubmitting = false
       this.error = error
     },
-    async updateArticle(slug: string, data: any) {
+    async updateArticle(slug: string, data: Article) {
       this.updateArticleStart()
 
       try {
-        const article = await articleApi.updateArticle(slug, data)
+        const article: Article = await articleApi.updateArticle(slug, data)
         this.updateArticleSuccess()
         router.push({name: 'article', params: {slug: article.slug}})
       } catch (error: any) {

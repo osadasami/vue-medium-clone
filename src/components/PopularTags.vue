@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import Error from '@/components/Error.vue'
+import Loading from '@/components/Loading.vue'
 import {useTagsStore} from '@/stores/tags'
 import {onMounted} from 'vue'
 import {RouterLink} from 'vue-router'
-import Loading from '../views/Loading.vue'
-import Error from './Error.vue'
 
 const tagsStore = useTagsStore()
 

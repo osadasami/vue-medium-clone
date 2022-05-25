@@ -4,7 +4,7 @@ import {defineStore} from 'pinia'
 export const useTagsStore = defineStore({
   id: 'tags',
   state: () => ({
-    tags: null,
+    tags: null as string[] | null,
     isLoading: false,
     error: null,
   }),
@@ -13,7 +13,7 @@ export const useTagsStore = defineStore({
       this.tags = null
       this.isLoading = true
     },
-    getTagsSuccess(tags: any) {
+    getTagsSuccess(tags: string[]) {
       this.tags = tags
       this.isLoading = false
     },

@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import ValidationErrors from '@/components/ValidationErrors.vue'
 import router from '@/router'
 import {useAuthStore} from '@/stores/auth'
 import {ref} from 'vue'
-import ValidationErrors from '../components/ValidationErrors.vue'
 
 const email = ref('')
 const password = ref('')

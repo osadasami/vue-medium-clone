@@ -4,6 +4,7 @@ import authApi, {
 } from '@/api/auth'
 import {setItem} from '@/helpers/localStorage'
 import router from '@/router'
+import type {User} from '@/types'
 import {defineStore} from 'pinia'
 
 export const useAuthStore = defineStore({
@@ -11,7 +12,7 @@ export const useAuthStore = defineStore({
   state: () => ({
     isSubmitting: false,
     isLoading: false,
-    user: null as any,
+    user: null as User | null,
     errors: null,
   }),
   getters: {},
@@ -20,7 +21,7 @@ export const useAuthStore = defineStore({
       this.isSubmitting = true
       this.errors = null
     },
-    registerSuccess(user: any) {
+    registerSuccess(user: User) {
       this.isSubmitting = false
       this.user = user
     },
@@ -57,7 +58,7 @@ export const useAuthStore = defineStore({
       this.errors = null
     },
 
-    loginSuccess(user: any) {
+    loginSuccess(user: User) {
       this.isSubmitting = false
       this.user = user
     },
@@ -71,7 +72,7 @@ export const useAuthStore = defineStore({
       this.isLoading = true
       this.errors = null
     },
-    getCurrentUserSuccess(user: any) {
+    getCurrentUserSuccess(user: User) {
       this.isLoading = false
       this.user = user
     },
@@ -88,7 +89,7 @@ export const useAuthStore = defineStore({
         this.getCurrentUserFailure()
       }
     },
-    updateCurrentUserSuccess(user: any) {
+    updateCurrentUserSuccess(user: User) {
       this.user = user
     },
     logout() {

@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import NewEditArticleForm from '@/components/NewEditArticleForm.vue'
 import {useArticleStore} from '@/stores/article'
 import {useEditArticleStore} from '@/stores/editArticle'
 import {onMounted} from 'vue'
 import {useRoute} from 'vue-router'
-import NewEditArticleForm from '../components/NewEditArticleForm.vue'
 
 const editArticleStore = useEditArticleStore()
 const articleStore = useArticleStore()

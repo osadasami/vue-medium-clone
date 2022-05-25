@@ -1,5 +1,6 @@
 import articleApi from '@/api/article'
 import router from '@/router'
+import type {Article} from '@/types'
 import {defineStore} from 'pinia'
 
 export const useNewArticleStore = defineStore({
@@ -20,7 +21,7 @@ export const useNewArticleStore = defineStore({
       this.isSubmitting = false
       this.error = error
     },
-    async createArticle(data: any) {
+    async createArticle(data: Article) {
       this.createArticleStart()
 
       try {

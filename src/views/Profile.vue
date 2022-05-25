@@ -1,12 +1,12 @@
 useUserProfileFollowStore
 <script setup lang="ts">
+import Feed from '@/components/Feed.vue'
+import FollowProfile from '@/components/FollowProfile.vue'
 import {useAuthStore} from '@/stores/auth'
 import {useUserProfileStore} from '@/stores/userProfile'
 import {useUserProfileFollowStore} from '@/stores/userProfileFollow'
 import {computed, onMounted, watch} from 'vue'
 import {RouterLink, useRoute} from 'vue-router'
-import Feed from '../components/Feed.vue'
-import FollowProfile from '../components/FollowProfile.vue'
 
 const route = useRoute()
 const userProfileStore = useUserProfileStore()

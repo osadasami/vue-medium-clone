@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {useAuthStore} from '@/stores/auth'
-import {useSettingsStore} from '@/stores/settings'
-import {computed} from 'vue'
-import ValidationErrors from '../components/ValidationErrors.vue'
+import ValidationErrors from '@/components/ValidationErrors.vue';
+import { useAuthStore } from '@/stores/auth';
+import { useSettingsStore } from '@/stores/settings';
+import { computed } from 'vue';
 
 const authStore = useAuthStore()
 const settingsStore = useSettingsStore()

@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import ValidationErrors from '@/components/ValidationErrors.vue'
 import {reactive, ref} from 'vue'
-import ValidationErrors from './ValidationErrors.vue'
 
 type formData = {
   title: string

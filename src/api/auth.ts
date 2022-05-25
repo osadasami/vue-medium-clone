@@ -1,4 +1,5 @@
 import axios from '@/api/axios'
+import type {User} from '@/types'
 
 export type CredentialsRegister = {
   email: string
@@ -23,7 +24,7 @@ function getCurrentUser() {
   return axios.get('/user')
 }
 
-function updateCurrentUser(user: any) {
+function updateCurrentUser(user: User) {
   return axios.put('/user', {user})
 }
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import Banner from '@/components/Banner.vue'
 import Feed from '@/components/Feed.vue'
+import FeedTabs from '@/components/FeedTabs.vue'
+import PopularTags from '@/components/PopularTags.vue'
 import {computed} from 'vue'
 import {useRoute} from 'vue-router'
-import Banner from '../components/Banner.vue'
-import FeedTabs from '../components/FeedTabs.vue'
-import PopularTags from '../components/PopularTags.vue'
 
 const route = useRoute()
 

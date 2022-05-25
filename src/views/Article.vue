@@ -1,16 +1,16 @@
 <script setup lang="ts">
+import AddToFavoriteButton from '@/components/AddToFavoriteButton.vue'
+import Comments from '@/components/Comments.vue'
+import Error from '@/components/Error.vue'
+import FollowProfile from '@/components/FollowProfile.vue'
+import Loading from '@/components/Loading.vue'
+import TagList from '@/components/TagList.vue'
 import {formatDate} from '@/filters/formatDate'
 import router from '@/router'
 import {useArticleStore} from '@/stores/article'
 import {useAuthStore} from '@/stores/auth'
 import {computed, onMounted} from 'vue'
 import {RouterLink, useRoute} from 'vue-router'
-import AddToFavoriteButton from '../components/AddToFavoriteButton.vue'
-import Comments from '../components/Comments.vue'
-import Error from '../components/Error.vue'
-import FollowProfile from '../components/FollowProfile.vue'
-import TagList from '../components/TagList.vue'
-import Loading from './Loading.vue'
 
 const route = useRoute()
 const articleStore = useArticleStore()

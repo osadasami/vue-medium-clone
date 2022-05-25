@@ -1,13 +1,14 @@
 import articleApi from '@/api/article'
 import {useCommentsStore} from '@/stores/comments'
+import type {Article} from '@/types'
 import {defineStore} from 'pinia'
 
 export const useArticleStore = defineStore({
   id: 'article',
   state: () => ({
-    data: null as any,
+    data: null as Article | null,
     isLoading: false,
-    error: null as any,
+    error: null,
   }),
   actions: {
     getArticleStart() {
@@ -15,7 +16,7 @@ export const useArticleStore = defineStore({
       this.data = null
       this.error = null
     },
-    getArticleSuccess(article: any) {
+    getArticleSuccess(article: Article) {
       this.data = article
       this.isLoading = false
     },

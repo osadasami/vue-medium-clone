@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import Error from '@/components/Error.vue'
 import {formatDate} from '@/filters/formatDate'
 import {useAuthStore} from '@/stores/auth'
 import {useCommentsStore} from '@/stores/comments'
 import {ref} from 'vue'
 import {RouterLink} from 'vue-router'
-import Error from './Error.vue'
 
 const props = defineProps<{
   slug: string
