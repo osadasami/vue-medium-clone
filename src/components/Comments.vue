@@ -49,7 +49,7 @@ async function createComment() {
             ></textarea>
           </div>
           <div class="card-footer">
-            <img class="comment-author-img" :src="authStore.user.image" />
+            <img class="comment-author-img" :src="authStore?.user?.image" />
             <button
               class="btn btn-sm btn-primary"
               type="submit"

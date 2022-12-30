@@ -1,5 +1,7 @@
 # Vue Medium Clone
 
+![](cover.png)
+
 https://vue-medium-clone-seven.vercel.app/
 
 Auth:
