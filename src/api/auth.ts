@@ -1,26 +1,23 @@
 import axios from '@/api/axios'
-import type {User} from '@/types'
+import type {
+  CredentialsLogin,
+  CredentialsRegister,
+  User,
+  UserResponse,
+} from '@/types'
+import type {AxiosResponse} from 'axios'
 
-export type CredentialsRegister = {
-  email: string
-  username: string
-  password: string
-}
-
-export type CredentialsLogin = {
-  email: string
-  password: string
-}
-
-function register(credentials: CredentialsRegister) {
-  return axios.post('/users', {user: credentials})
+function register(
+  credentials: CredentialsRegister
+): Promise<AxiosResponse<UserResponse>> {
+  return axios.post<UserResponse>('/users', {user: credentials})
 }
 
 function login(credentials: CredentialsLogin) {
   return axios.post('/users/login', {user: credentials})
 }
 
-function getCurrentUser() {
+function getCurrentUser(): Promise<AxiosResponse<UserResponse>> {
   return axios.get('/user')
 }
 

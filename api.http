@@ -1,0 +1,22 @@
+### Get current user failure
+GET https://api.realworld.io/api/user
+
+### Get current user success
+GET https://api.realworld.io/api/user
+Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InF3ZUBhc2RhZnNmZCIsInVzZXJuYW1lIjoicXdlZWRzZiIsImlhdCI6MTY3MjQwODc1MSwiZXhwIjoxNjc3NTkyNzUxfQ.vUGpJ3bPIJws-4WvYgQkdGvov7vDtayiRtEbiwDaug8
+
+### Register failure
+POST https://api.realworld.io/api/users
+
+### Register success
+POST https://api.realworld.io/api/users
+content-type: application/json
+
+
+{
+  "user": {
+    "email": "vasya123@vasya123.com",
+    "username": "vasya123",
+    "password": "vasya123@vasya123.com"
+  }
+}

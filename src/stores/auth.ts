@@ -1,101 +1,86 @@
-import authApi, {
-  type CredentialsLogin,
-  type CredentialsRegister,
-} from '@/api/auth'
+import auth from '@/api/auth'
 import {setItem} from '@/helpers/localStorage'
-import router from '@/router'
-import type {User} from '@/types'
+import type {CredentialsLogin, CredentialsRegister, Errors, User} from '@/types'
+import axios from 'axios'
 import {defineStore} from 'pinia'
+import {ref, type Ref} from 'vue'
+import {useRouter} from 'vue-router'
 
-export const useAuthStore = defineStore({
-  id: 'auth',
-  state: () => ({
-    isSubmitting: false,
-    isLoading: false,
-    user: null as User | null,
-    errors: null,
-  }),
-  getters: {},
-  actions: {
-    registerStart() {
-      this.isSubmitting = true
-      this.errors = null
-    },
-    registerSuccess(user: User) {
-      this.isSubmitting = false
-      this.user = user
-    },
-    registerFailure(errors: any) {
-      this.isSubmitting = false
-      this.errors = errors
-    },
-    async register(credentials: CredentialsRegister) {
-      this.registerStart()
+export const useAuthStore = defineStore('auth', () => {
+  const isLoading: Ref<boolean> = ref(false)
+  const user: Ref<User | null> = ref(null)
+  const errors: Ref<Errors | null> = ref(null)
+  const router = useRouter()
 
-      try {
-        const res = await authApi.register(credentials)
-        setItem('token', res.data.user.token)
-        this.registerSuccess(res.data.user)
-      } catch (err: any) {
-        this.registerFailure(err.response.data.errors)
+  async function login(credentials: CredentialsLogin) {
+    isLoading.value = true
+    errors.value = null
+    user.value = null
+
+    try {
+      const res = await auth.login(credentials)
+      user.value = res.data.user
+      setItem('token', res.data.user.token)
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        errors.value = (err.response?.data as {errors: Errors}).errors
       }
-    },
+    } finally {
+      isLoading.value = false
+    }
+  }
 
-    async login(credentials: CredentialsLogin) {
-      this.loginStart()
-      try {
-        const res = await authApi.login(credentials)
-        setItem('token', res.data.user.token)
-        this.loginSuccess(res.data.user)
-      } catch (err: any) {
-        console.log(err)
-        this.loginFailure(err.response.data.errors)
+  async function register(credentials: CredentialsRegister) {
+    isLoading.value = true
+    errors.value = null
+    user.value = null
+
+    try {
+      const res = await auth.register(credentials)
+      setItem('token', res.data.user.token)
+      router.push({name: 'profile'})
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        errors.value = (err.response?.data as {errors: Errors}).errors
       }
-    },
+    } finally {
+      isLoading.value = false
+    }
+  }
+  function logout() {
+    user.value = null
+    setItem('token', '')
+    router.push({name: 'home'})
+  }
+  async function getCurrentUser() {
+    isLoading.value = true
 
-    loginStart() {
-      this.isSubmitting = true
-      this.errors = null
-    },
+    try {
+      const res = await auth.getCurrentUser()
+      user.value = res.data.user
+    } catch (err) {
+    } finally {
+      isLoading.value = false
+    }
+  }
 
-    loginSuccess(user: User) {
-      this.isSubmitting = false
-      this.user = user
-    },
-
-    loginFailure(errors: any) {
-      this.isSubmitting = false
-      this.errors = errors
-    },
-
-    getCurrentUserStart() {
-      this.isLoading = true
-      this.errors = null
-    },
-    getCurrentUserSuccess(user: User) {
-      this.isLoading = false
-      this.user = user
-    },
-    getCurrentUserFailure() {
-      this.isLoading = false
-      this.user = null
-    },
-    async getCurrentUser() {
-      this.getCurrentUserStart()
-      try {
-        const res = await authApi.getCurrentUser()
-        this.getCurrentUserSuccess(res.data.user)
-      } catch (err: any) {
-        this.getCurrentUserFailure()
-      }
-    },
-    updateCurrentUserSuccess(user: User) {
-      this.user = user
-    },
-    logout() {
-      this.user = null
-      setItem('token', '')
-      router.push({name: 'home'})
-    },
-  },
+  return {
+    user,
+    register,
+    login,
+    logout,
+    getCurrentUser,
+    errors,
+    isLoading,
+  }
 })
+
+//     async getCurrentUser() {
+//       this.getCurrentUserStart()
+//       try {
+//         const res = await authApi.getCurrentUser()
+//         this.getCurrentUserSuccess(res.data.user)
+//       } catch (err: any) {
+//         this.getCurrentUserFailure()
+//       }
+//     },

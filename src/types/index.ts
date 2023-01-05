@@ -1,5 +1,6 @@
 export type User = {
   email: string
+  username: string
   token: string
   bio: string
   image: string | null
@@ -25,8 +26,6 @@ export type Article = {
   author: Profile
 }
 
-export type Articles = Article[]
-
 export type Comment = {
   id: number
   createdAt: string
@@ -35,4 +34,17 @@ export type Comment = {
   author: Profile
 }
 
-export type Comments = Comment[]
+export type CredentialsLogin = {
+  email: string
+  password: string
+}
+
+export type CredentialsRegister = {
+  email: string
+  username: string
+  password: string
+}
+
+export type Errors = {[key: string]: string[]}
+
+export type UserResponse = {user: User}

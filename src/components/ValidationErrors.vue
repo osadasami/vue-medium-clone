@@ -7,10 +7,11 @@
 </template>
 
 <script setup lang="ts">
+import type {Errors} from '@/types'
 import {computed} from 'vue'
 
 const props = defineProps<{
-  errors: any
+  errors: Errors
 }>()
 
 const errorMessages = computed(() => {

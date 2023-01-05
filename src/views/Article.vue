@@ -25,7 +25,7 @@ const isAuthor = computed(() => {
     return false
   }
 
-  if (authStore?.user?.username === articleStore.data.author.username) {
+  if (authStore.user.username === articleStore.data.author.username) {
     return true
   } else {
     return false

@@ -1,12 +1,19 @@
 <script setup lang="ts">
 import ValidationErrors from '@/components/ValidationErrors.vue'
-import router from '@/router'
 import {useAuthStore} from '@/stores/auth'
 import {ref} from 'vue'
+import {useRouter} from 'vue-router'
 
 const email = ref('')
 const password = ref('')
 const authStore = useAuthStore()
+const router = useRouter()
+
+authStore.$subscribe(() => {
+  if (authStore.user) {
+    router.push({name: 'home'})
+  }
+})
 
 async function onSubmit() {
   await authStore.login({
@@ -26,9 +33,7 @@ async function onSubmit() {
         <div class="col-md-6 offset-md-3 col-xs-12">
           <h1 class="text-xs-center">Sign In</h1>
           <p class="text-xs-center">
-            <RouterLink :to="{name: 'register'}"
-              >Already have an account?</RouterLink
-            >
+            <RouterLink :to="{name: 'register'}">Need an account?</RouterLink>
           </p>
 
           <ValidationErrors
@@ -55,7 +60,7 @@ async function onSubmit() {
             </fieldset>
             <button
               class="btn btn-lg btn-primary pull-xs-right"
-              :disabled="authStore.isSubmitting"
+              :disabled="authStore.isLoading"
             >
               Sign In
             </button>
