@@ -16,7 +16,7 @@ const authStore = useAuthStore()
 const newComment = ref('')
 
 function isAuthor(author: string) {
-  return authStore.user.username === author
+  return authStore?.user?.username === author
 }
 
 function deleteComment(id: number) {
@@ -39,7 +39,11 @@ async function createComment() {
       <div>
         <Error v-if="commentsStore.error" />
 
-        <form class="card comment-form" @submit.prevent="createComment">
+        <form
+          class="card comment-form"
+          @submit.prevent="createComment"
+          v-if="authStore.user"
+        >
           <div class="card-block">
             <textarea
               v-model="newComment"
