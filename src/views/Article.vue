@@ -25,7 +25,7 @@ const isAuthor = computed(() => {
     return false
   }
 
-  if (authStore.user.username === articleStore.data.author.username) {
+  if (authStore?.user?.username === articleStore?.data?.author.username) {
     return true
   } else {
     return false
@@ -92,11 +92,13 @@ async function deleteArticle() {
           </span>
           <span v-else>
             <FollowProfile
+              v-if="authStore.user"
               :username="articleStore.data.author.username"
               :is-following="articleStore.data.author.following"
             />
             &nbsp;
             <AddToFavoriteButton
+              v-if="authStore.user"
               :article-slug="articleStore.data.slug"
               :is-favorited="articleStore.data.favorited"
               :favorites-count="articleStore.data.favoritesCount"

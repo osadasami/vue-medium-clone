@@ -4,13 +4,11 @@ import Feed from '@/components/Feed.vue'
 import FollowProfile from '@/components/FollowProfile.vue'
 import {useAuthStore} from '@/stores/auth'
 import {useUserProfileStore} from '@/stores/userProfile'
-import {useUserProfileFollowStore} from '@/stores/userProfileFollow'
 import {computed, onMounted, watch} from 'vue'
 import {RouterLink, useRoute} from 'vue-router'
 
 const route = useRoute()
 const userProfileStore = useUserProfileStore()
-const userProfileFollowStore = useUserProfileFollowStore()
 const authStore = useAuthStore()
 const apiParams = computed(() => {
   const isFavorites = route.path.includes('favorites')
@@ -20,7 +18,7 @@ const apiParams = computed(() => {
     : {author: route.params.slug}
 })
 const isCurrentUserProfile = computed(() => {
-  return userProfileStore.profile.username === authStore.user.username
+  return userProfileStore?.profile?.username === authStore?.user?.username
 })
 
 const userProfileSlug = computed(() => {
@@ -47,6 +45,7 @@ onMounted(async () => {
             <p>{{ userProfileStore.profile.bio }}</p>
             <div>
               <FollowProfile
+                v-if="authStore.user"
                 :username="userProfileStore.profile.username"
                 :is-following="userProfileStore.profile.following"
               />

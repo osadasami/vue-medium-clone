@@ -1,5 +1,5 @@
 import userProfileApi from '@/api/userProfile'
-import type {Profile} from '@/types'
+import type {Errors, Profile} from '@/types'
 import {defineStore} from 'pinia'
 
 export const useUserProfileStore = defineStore({
@@ -7,7 +7,7 @@ export const useUserProfileStore = defineStore({
   state: () => ({
     profile: null as Profile | null,
     isLoading: false,
-    error: null as any,
+    error: null as Errors | null,
   }),
   actions: {
     getUserProfileStart() {
